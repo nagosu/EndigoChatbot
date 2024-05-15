@@ -38,6 +38,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const chatbotInfoSuggestion2 = document.querySelector(
     ".chatbot-info-suggestion-2"
   );
+  const chatbotMessagesWrapper = document.querySelector(
+    ".chatbot-messages-wrapper"
+  );
   const chatbotMessagesContainer = document.querySelector(
     ".chatbot-messages-container"
   );
@@ -113,9 +116,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Chatbot Video
     chatbotVideo.style.display = "block";
-
-    // Chatbot Messages Container
-    // chatbotMessagesContainer.style.display = "flex";
   });
 
   // 챗봇 닫기 버튼 클릭 이벤트
@@ -165,17 +165,14 @@ document.addEventListener("DOMContentLoaded", function () {
     chatbotInfoSuggestion2.style.display = "";
 
     // Chatbot Messages Container
-    chatbotMessagesContainer.style.display = "";
+    chatbotMessagesWrapper.style.display = "";
   });
 
-  // 입력 상자에서 엔터 키를 누르면 chatbotMessagesContainer 표시 및 메시지 전송
-  chatbotChatInfoChatInputBox.addEventListener("keydown", function (event) {
-    if (
-      event.key === "Enter" &&
-      chatbotChatInfoChatInputBox.value.trim() !== ""
-    ) {
+  function sendMessage(text) {
+    const MessageText = text || chatbotChatInfoChatInputBox.value.trim();
+    if (MessageText !== "") {
       // 사용자 입력 값 가져오기
-      const userInput = chatbotChatInfoChatInputBox.value.trim();
+      const userInput = MessageText;
 
       // 새로운 메시지 요소 생성
       const newMessage1 = document.createElement("div");
@@ -219,15 +216,38 @@ document.addEventListener("DOMContentLoaded", function () {
       chatbotChatInfoChatInputBox.value = "";
 
       // 챗봇 메시지 컨테이너 표시
-      chatbotMessagesContainer.style.display = "flex";
+      chatbotMessagesWrapper.style.display = "flex";
 
       // 제안 버튼 숨기기
       chatbotInfoSuggestion1.style.display = "none";
       chatbotInfoSuggestion2.style.display = "none";
 
       // 스크롤을 맨 아래로 내리기
-      chatbotMessagesContainer.scrollTop =
-        chatbotMessagesContainer.scrollHeight;
+      chatbotMessagesWrapper.scrollTop = chatbotMessagesWrapper.scrollHeight;
     }
+  }
+
+  chatbotInfoSuggestion1.addEventListener("click", function () {
+    chatbotInfoSuggestion1.style.display = "none";
+    chatbotInfoSuggestion2.style.display = "none";
+    sendMessage("Tell me about your use case");
+  });
+
+  chatbotInfoSuggestion2.addEventListener("click", function () {
+    chatbotInfoSuggestion1.style.display = "none";
+    chatbotInfoSuggestion2.style.display = "none";
+    sendMessage("How can I use it for my business?");
+  });
+
+  // 입력 상자에서 엔터 키를 누르면 메시지 전송
+  chatbotChatInfoChatInputBox.addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+      sendMessage();
+    }
+  });
+
+  // 전송 버튼 클릭 시 메시지 전송
+  chatbotChatInfoSendButton.addEventListener("click", function () {
+    sendMessage();
   });
 });

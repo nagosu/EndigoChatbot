@@ -284,23 +284,29 @@ button {
   color: white;
 }
 
-.chatbot-messages-container {
+.chatbot-messages-wrapper {
   display: none;
-  bottom: 52px;
   position: absolute;
   flex-direction: column;
-  justify-content: flex-end;
+  bottom: 52px;
   width: 480px;
-  height: 88px;
+  height: 100px;
+  justify-content: flex-end;
   overflow-y: scroll;
-  padding-top: 20px;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
   z-index: 1000;
   mask-image: linear-gradient(transparent, rgb(0, 0, 0) 50%);
 }
 
-.chatbot-messages-container::-webkit-scrollbar {
+.chatbot-messages-container {
+  display: flex;
+  width: 100%;
+  height: fit-content;
+  flex-direction: column;
+}
+
+.chatbot-messages-wrapper::-webkit-scrollbar {
   width: 0px;
   background: transparent; /* Chrome, Safari, Opera */
 }
