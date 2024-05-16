@@ -200,6 +200,16 @@ button {
   border-radius: 8px;
   background-color: white;
   border: 1px solid rgba(35, 40, 51, 0.1);
+  transition: opacity 0.2s ease-out 0s, border-color 0.2s ease-out 0s,
+    color 0.2s ease-out 0s, background 0.2s ease-out 0s, fill 0.2s ease-out 0s,
+    box-shadow 0.2s ease-out 0s;
+  user-select: none;
+  color: rgb(35, 40, 51);
+
+  &:hover {
+    border-color: rgba(35, 40, 51, 0.1);
+    background: rgba(35, 40, 51, 0.06);
+  }
 
   &:disabled {
     cursor: not-allowed;
@@ -212,9 +222,13 @@ button {
   display: flex;
   border-radius: 8px;
   background-color: white;
-  border: none;
+  border: 1px solid transparent;
   padding: 0 16px;
-  transition: border 0.2s ease-out;
+  transition: border-color 0.2s ease-out 0s, box-shadow 0.2s ease-out 0s;
+
+  &:hover {
+    border: 1px solid rgb(117, 89, 255);
+  }
 
   &:focus {
     border: 1px solid rgb(117, 89, 255);
@@ -242,12 +256,17 @@ button {
   justify-content: center;
   align-items: center;
   border-radius: 8px;
+  user-select: none;
+  transition: opacity 0.2s ease-out 0s, border-color 0.2s ease-out 0s,
+    color 0.2s ease-out 0s, background 0.2s ease-out 0s, fill 0.2s ease-out 0s,
+    box-shadow 0.2s ease-out 0s;
 
-  &:disabled {
-    background-color: rgba(117, 89, 255, 0.4);
+  &:hover {
+    background: rgb(81, 55, 210);
   }
 
   &:disabled {
+    background-color: rgba(117, 89, 255, 0.4);
     cursor: not-allowed;
   }
 }
@@ -261,6 +280,14 @@ button {
   border-radius: 8px;
   background-color: white;
   border: 1px solid rgba(35, 40, 51, 0.1);
+  transition: opacity 0.2s ease-out 0s, border-color 0.2s ease-out 0s,
+    color 0.2s ease-out 0s, background 0.2s ease-out 0s, fill 0.2s ease-out 0s,
+    box-shadow 0.2s ease-out 0s;
+
+  &:hover {
+    border-color: rgba(35, 40, 51, 0.1);
+    background: rgba(35, 40, 51, 0.06);
+  }
 
   &:disabled {
     cursor: not-allowed;
@@ -307,7 +334,7 @@ button {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
   z-index: 1000;
-  mask-image: linear-gradient(transparent, rgb(0, 0, 0) 50%);
+  mask-image: linear-gradient(transparent, rgb(0, 0, 0) 40%);
 }
 
 .chatbot-messages-container {
@@ -328,11 +355,12 @@ button {
   align-items: start;
   width: 100%;
   height: auto;
+  margin: 3px 0;
 }
 
 .chatbot-message-avatar {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   border-radius: 8px;
   margin-right: 6px;
 }
