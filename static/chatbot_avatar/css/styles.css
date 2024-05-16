@@ -232,6 +232,14 @@ button {
 
   &:focus {
     border: 1px solid rgb(117, 89, 255);
+
+    &::placeholder {
+      color: #bbbbbb;
+    }
+  }
+
+  &::placeholder {
+    color: #888888;
   }
 
   &:disabled {

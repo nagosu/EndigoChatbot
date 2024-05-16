@@ -135,7 +135,30 @@ document.addEventListener("DOMContentLoaded", function () {
     chatbotMessagesWrapper.style.display = "";
   });
 
-  function sendMessage(text) {
+  async function server_chat(userMessage) {
+    // 더미 데이터
+    let data = {
+      assistant_message1: "네, 반가워요",
+    };
+
+    // 서버 통신 구현 부분
+
+    if (data && userMessage) {
+      // AI 챗봇 메시지 가져오기
+      aiMessage = data.assistant_message1;
+      if (aiMessage !== "") {
+        return aiMessage;
+      } else {
+        console.log("aiMessage가 없습니다.");
+        return null;
+      }
+    } else {
+      console.error("Error response");
+      return null;
+    }
+  }
+
+  async function sendMessage(text) {
     const MessageText = text || chatbotChatInfoChatInputBox.value.trim();
     if (MessageText !== "") {
       // 사용자 입력 값 가져오기
@@ -160,24 +183,28 @@ document.addEventListener("DOMContentLoaded", function () {
       // 생성된 요소를 메시지 컨테이너에 추가
       chatbotMessagesContainer.appendChild(newMessage1);
 
-      // 새로운 메시지 요소 생성
-      const newMessage2 = document.createElement("div");
-      newMessage2.classList.add("chatbot-message");
+      const aiMessage = await server_chat(userInput);
 
-      const newAvatar2 = document.createElement("img");
-      newAvatar2.src = "../../static/chatbot_avatar/images/avatar-server.png";
-      newAvatar2.alt = "";
-      newAvatar2.classList.add("chatbot-message-avatar");
+      if (aiMessage) {
+        // 새로운 메시지 요소 생성
+        const newMessage2 = document.createElement("div");
+        newMessage2.classList.add("chatbot-message");
 
-      const newMessageText2 = document.createElement("div");
-      newMessageText2.classList.add("chatbot-message-text");
-      newMessageText2.textContent = "안녕하세요, 무엇을 도와드릴까요?";
+        const newAvatar2 = document.createElement("img");
+        newAvatar2.src = "../../static/chatbot_avatar/images/avatar-server.png";
+        newAvatar2.alt = "";
+        newAvatar2.classList.add("chatbot-message-avatar");
 
-      newMessage2.appendChild(newAvatar2);
-      newMessage2.appendChild(newMessageText2);
+        const newMessageText2 = document.createElement("div");
+        newMessageText2.classList.add("chatbot-message-text");
+        newMessageText2.textContent = aiMessage;
 
-      // 생성된 요소를 메시지 컨테이너에 추가
-      chatbotMessagesContainer.appendChild(newMessage2);
+        newMessage2.appendChild(newAvatar2);
+        newMessage2.appendChild(newMessageText2);
+
+        // 생성된 요소를 메시지 컨테이너에 추가
+        chatbotMessagesContainer.appendChild(newMessage2);
+      }
 
       // 입력 창 비우기
       chatbotChatInfoChatInputBox.value = "";
@@ -197,19 +224,21 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  // 제안 메시지 1 클릭 이벤트 (Tell me about your use case)
   chatbotInfoSuggestion1.addEventListener("click", function () {
     chatbotInfoSuggestion1.style.display = "none";
     chatbotInfoSuggestion2.style.display = "none";
     sendMessage("Tell me about your use case");
   });
 
+  // 제안 메시지 2 클릭 이벤트 (How can I use it for my business?)
   chatbotInfoSuggestion2.addEventListener("click", function () {
     chatbotInfoSuggestion1.style.display = "none";
     chatbotInfoSuggestion2.style.display = "none";
     sendMessage("How can I use it for my business?");
   });
 
-  // 입력 상자에서 엔터 키를 누르면 메시지 전송
+  // input box에서 엔터 키를 누르면 메시지 전송
   chatbotChatInfoChatInputBox.addEventListener("keydown", function (event) {
     if (event.isComposing) return;
     if (event.key === "Enter") {
