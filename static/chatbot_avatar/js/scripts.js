@@ -1,45 +1,36 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const chatbotBackground = document.querySelector(".chatbot-background");
-  const chatbotContainer = document.querySelector(".chatbot-container");
-  const chatbotPreviewImage = document.querySelector(".chatbot-preview-image");
-  const chatbotEnterButton = document.querySelector(".chatbot-enter-button");
-  const chatbotCloseButton = document.querySelector(".chatbot-close-button");
-  const chatbotChatbox = document.querySelector(".chatbot-chatbox");
+  const chatbotBackground = document.querySelector(".chatbot");
+  const chatbotContainer = document.querySelector(".chatbot__container");
+  const chatbotPreviewImage = document.querySelector(".chatbot__preview-image");
+  const chatbotEnterButton = document.querySelector(".chatbot__enter-button");
+  const chatbotCloseButton = document.querySelector(".chatbot__close-button");
+  const chatbotChatbox = document.querySelector(".chatbot__chatbox");
 
-  const chatbotInfo = document.querySelector(".chatbot-info");
+  const chatbotInfo = document.querySelector(".chatbot__info");
   const chatbotInfoStartButton = document.querySelector(
-    ".chatbot-info-start-button"
-  );
-  const chatbotChatInfoNewChatButton = document.querySelector(
-    ".chatbot-chat-info-new-chat-button"
+    ".chatbot__info-start-button"
   );
   const chatbotChatInfoChatInputBox = document.querySelector(
-    ".chatbot-chat-info-chat-input-box"
+    ".chatbot__chat-input-box"
   );
   const chatbotChatInfoSendButton = document.querySelector(
-    ".chatbot-chat-info-send-button"
+    ".chatbot__chat-info-send-button"
   );
-  const chatbotChatInfoVoiceButton = document.querySelector(
-    ".chatbot-chat-info-voice-button"
-  );
-  const chatbotChatInfoVoiceButtonRect = document.querySelector(
-    ".chatbot-chat-info-voice-button-rect"
-  );
-  const chatbotVideo = document.querySelector(".chatbot-video");
+  const chatbotVideo = document.querySelector(".chatbot__video");
   const chatbotInfoSuggestion1 = document.querySelector(
-    ".chatbot-info-suggestion-1"
+    ".chatbot__info-suggestion-1"
   );
   const chatbotInfoSuggestion2 = document.querySelector(
-    ".chatbot-info-suggestion-2"
+    ".chatbot__info-suggestion-2"
   );
   const chatbotMessagesWrapper = document.querySelector(
-    ".chatbot-messages-wrapper"
+    ".chatbot__messages-wrapper"
   );
   const chatbotMessagesContainer = document.querySelector(
-    ".chatbot-messages-container"
+    ".chatbot__messages-container"
   );
   const chatbotSendButtonIconPath = document.querySelector(
-    ".chatbot-chat-info-chat-send-button-icon-path"
+    ".chatbot__send-button-icon-path"
   );
 
   // 챗봇 최초진입 버튼 클릭 이벤트
@@ -124,17 +115,18 @@ document.addEventListener("DOMContentLoaded", function () {
     // Chatbot Video
     chatbotVideo.style.display = "";
 
+    // Chatbot Messages Container
+    chatbotMessagesWrapper.style.display = "";
+
     // Chatbot Info Start Button
     chatbotInfoStartButton.style.display = "";
 
     // Chatbot Info Suggestion Button
     chatbotInfoSuggestion1.style.display = "";
     chatbotInfoSuggestion2.style.display = "";
-
-    // Chatbot Messages Container
-    chatbotMessagesWrapper.style.display = "";
   });
 
+  // 메시지 서버통신
   async function server_chat(userMessage) {
     // 더미 데이터
     let data = {
@@ -158,6 +150,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  // 클라이언트 메시지 전송 및 서버 응답 채팅창에 표시
   async function sendMessage(text) {
     const MessageText = text || chatbotChatInfoChatInputBox.value.trim();
     if (MessageText !== "") {
@@ -211,6 +204,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // 챗봇 메시지 컨테이너 표시
       chatbotMessagesWrapper.style.display = "flex";
+      chatbotMessagesContainer.style.display = "flex";
 
       // 제안 버튼 숨기기
       chatbotInfoSuggestion1.style.display = "none";
@@ -255,10 +249,12 @@ document.addEventListener("DOMContentLoaded", function () {
   chatbotChatInfoChatInputBox.addEventListener("input", function () {
     const MessageText = chatbotChatInfoChatInputBox.value.trim();
     if (MessageText !== "") {
-      chatbotSendButtonIconPath.setAttribute("stroke", "black");
+      chatbotSendButtonIconPath.setAttribute("stroke", "#FFFFFF");
       chatbotChatInfoSendButton.removeAttribute("disabled");
+      // chatbotInfoSuggestion1.style.display = "none";
+      // chatbotInfoSuggestion2.style.display = "none";
     } else {
-      chatbotSendButtonIconPath.setAttribute("stroke", "#EEEEEE");
+      chatbotSendButtonIconPath.setAttribute("stroke", "#aaaaaa");
     }
   });
 });
