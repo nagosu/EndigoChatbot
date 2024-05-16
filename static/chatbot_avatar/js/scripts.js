@@ -87,8 +87,8 @@ document.addEventListener("DOMContentLoaded", function () {
     chatbotInfoStartButton.style.display = "none";
 
     // Chatbot Info Suggestion Button
-    chatbotInfoSuggestion1.style.display = "flex";
-    chatbotInfoSuggestion2.style.display = "flex";
+    chatbotInfoSuggestion1.style.display = "inline-flex";
+    chatbotInfoSuggestion2.style.display = "inline-flex";
 
     // Chatbot Chat Info New Chat Button
     chatbotChatInfoNewChatButton.removeAttribute("disabled");
