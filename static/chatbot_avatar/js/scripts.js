@@ -1,48 +1,36 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const chatbotBackground = document.querySelector(".chatbot-background");
-  const chatbotContainer = document.querySelector(".chatbot-container");
-  const chatbotPreviewImage = document.querySelector(".chatbot-preview-image");
-  const chatbotEnterButton = document.querySelector(".chatbot-enter-button");
-  const chatbotCloseButton = document.querySelector(".chatbot-close-button");
-  const chatbotChatbox = document.querySelector(".chatbot-chatbox");
+  const chatbotBackground = document.querySelector(".chatbot");
+  const chatbotContainer = document.querySelector(".chatbot__container");
+  const chatbotPreviewImage = document.querySelector(".chatbot__preview-image");
+  const chatbotEnterButton = document.querySelector(".chatbot__enter-button");
+  const chatbotCloseButton = document.querySelector(".chatbot__close-button");
+  const chatbotChatbox = document.querySelector(".chatbot__chatbox");
 
-  const chatbotInfo = document.querySelector(".chatbot-info");
+  const chatbotInfo = document.querySelector(".chatbot__info");
   const chatbotInfoStartButton = document.querySelector(
-    ".chatbot-info-start-button"
-  );
-  const chatbotChatInfoNewChatButton = document.querySelector(
-    ".chatbot-chat-info-new-chat-button"
+    ".chatbot__info-start-button"
   );
   const chatbotChatInfoChatInputBox = document.querySelector(
-    ".chatbot-chat-info-chat-input-box"
-  );
-  const chatbotChatInfoNewChatButtonIconPaths = document.querySelectorAll(
-    ".chatbot-chat-info-new-chat-button-icon-path"
+    ".chatbot__chat-input-box"
   );
   const chatbotChatInfoSendButton = document.querySelector(
-    ".chatbot-chat-info-send-button"
+    ".chatbot__chat-info-send-button"
   );
-  const chatbotChatInfoVoiceButton = document.querySelector(
-    ".chatbot-chat-info-voice-button"
-  );
-  const chatbotChatInfoVoiceButtonRect = document.querySelector(
-    ".chatbot-chat-info-voice-button-rect"
-  );
-  const chatbotChatInfoVoiceButtonPaths = document.querySelectorAll(
-    ".chatbot-chat-info-voice-button-path"
-  );
-  const chatbotVideo = document.querySelector(".chatbot-video");
+  const chatbotVideo = document.querySelector(".chatbot__video");
   const chatbotInfoSuggestion1 = document.querySelector(
-    ".chatbot-info-suggestion-1"
+    ".chatbot__info-suggestion-1"
   );
   const chatbotInfoSuggestion2 = document.querySelector(
-    ".chatbot-info-suggestion-2"
+    ".chatbot__info-suggestion-2"
   );
   const chatbotMessagesWrapper = document.querySelector(
-    ".chatbot-messages-wrapper"
+    ".chatbot__messages-wrapper"
   );
   const chatbotMessagesContainer = document.querySelector(
-    ".chatbot-messages-container"
+    ".chatbot__messages-container"
+  );
+  const chatbotSendButtonIconPath = document.querySelector(
+    ".chatbot__send-button-icon-path"
   );
 
   // 챗봇 최초진입 버튼 클릭 이벤트
@@ -58,8 +46,10 @@ document.addEventListener("DOMContentLoaded", function () {
     chatbotContainer.style.borderRadius = "10px";
 
     // chatbotPreviewImage
-    chatbotPreviewImage.style.display = "block";
-    chatbotPreviewImage.style.width = "100%";
+    chatbotPreviewImage.style.display = "none";
+
+    // Chatbot Video
+    chatbotVideo.style.display = "block";
 
     // Chatbot Button
     chatbotEnterButton.style.display = "none";
@@ -69,11 +59,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Chatbot Chat Box
     chatbotChatbox.style.display = "flex";
-  });
-
-  // 챗봇 시작 버튼 클릭 이벤트
-  chatbotInfoStartButton.addEventListener("click", function () {
-    // Chatbot Chat Box
     chatbotChatbox.style.height = "92.5px";
 
     // Chatbot Info
@@ -83,39 +68,12 @@ document.addEventListener("DOMContentLoaded", function () {
     chatbotInfo.style.backdropFilter = "none";
     chatbotInfo.style.border = "none";
 
+    // Chatbot Info Suggestion Button
+    chatbotInfoSuggestion1.style.display = "inline-flex";
+    chatbotInfoSuggestion2.style.display = "inline-flex";
+
     // Chatbot Info Start Button
     chatbotInfoStartButton.style.display = "none";
-
-    // Chatbot Info Suggestion Button
-    chatbotInfoSuggestion1.style.display = "flex";
-    chatbotInfoSuggestion2.style.display = "flex";
-
-    // Chatbot Chat Info New Chat Button
-    chatbotChatInfoNewChatButton.removeAttribute("disabled");
-
-    // Chatbot Chat Info New Chat Button Icon Paths
-    chatbotChatInfoNewChatButtonIconPaths.forEach((path) => {
-      path.setAttribute("stroke", "#000000");
-    });
-
-    // Chatbot Chat Info Chat Input Box
-    chatbotChatInfoChatInputBox.removeAttribute("disabled");
-
-    // Chatbot Chat Info Send Button
-    chatbotChatInfoSendButton.removeAttribute("disabled");
-
-    // Chatbot Chat Info Voice Button
-    chatbotChatInfoVoiceButtonRect.setAttribute("fill", "#000000");
-    chatbotChatInfoVoiceButtonPaths.forEach((path) => {
-      path.setAttribute("stroke", "#000000");
-    });
-    chatbotChatInfoVoiceButton.removeAttribute("disabled");
-
-    // Chatbot Preview Image
-    chatbotPreviewImage.style.display = "none";
-
-    // Chatbot Video
-    chatbotVideo.style.display = "block";
   });
 
   // 챗봇 닫기 버튼 클릭 이벤트
@@ -157,18 +115,43 @@ document.addEventListener("DOMContentLoaded", function () {
     // Chatbot Video
     chatbotVideo.style.display = "";
 
+    // Chatbot Messages Container
+    chatbotMessagesWrapper.style.display = "";
+
     // Chatbot Info Start Button
     chatbotInfoStartButton.style.display = "";
 
     // Chatbot Info Suggestion Button
     chatbotInfoSuggestion1.style.display = "";
     chatbotInfoSuggestion2.style.display = "";
-
-    // Chatbot Messages Container
-    chatbotMessagesWrapper.style.display = "";
   });
 
-  function sendMessage(text) {
+  // 메시지 서버통신
+  async function server_chat(userMessage) {
+    // 더미 데이터
+    let data = {
+      assistant_message1: "네, 반가워요",
+    };
+
+    // 서버 통신 구현 부분
+
+    if (data && userMessage) {
+      // AI 챗봇 메시지 가져오기
+      aiMessage = data.assistant_message1;
+      if (aiMessage !== "") {
+        return aiMessage;
+      } else {
+        console.log("aiMessage가 없습니다.");
+        return null;
+      }
+    } else {
+      console.error("Error response");
+      return null;
+    }
+  }
+
+  // 클라이언트 메시지 전송 및 서버 응답 채팅창에 표시
+  async function sendMessage(text) {
     const MessageText = text || chatbotChatInfoChatInputBox.value.trim();
     if (MessageText !== "") {
       // 사용자 입력 값 가져오기
@@ -193,30 +176,35 @@ document.addEventListener("DOMContentLoaded", function () {
       // 생성된 요소를 메시지 컨테이너에 추가
       chatbotMessagesContainer.appendChild(newMessage1);
 
-      // 새로운 메시지 요소 생성
-      const newMessage2 = document.createElement("div");
-      newMessage2.classList.add("chatbot-message");
+      const aiMessage = await server_chat(userInput);
 
-      const newAvatar2 = document.createElement("img");
-      newAvatar2.src = "../../static/chatbot_avatar/images/avatar-server.png";
-      newAvatar2.alt = "";
-      newAvatar2.classList.add("chatbot-message-avatar");
+      if (aiMessage) {
+        // 새로운 메시지 요소 생성
+        const newMessage2 = document.createElement("div");
+        newMessage2.classList.add("chatbot-message");
 
-      const newMessageText2 = document.createElement("div");
-      newMessageText2.classList.add("chatbot-message-text");
-      newMessageText2.textContent = "안녕하세요, 무엇을 도와드릴까요?";
+        const newAvatar2 = document.createElement("img");
+        newAvatar2.src = "../../static/chatbot_avatar/images/avatar-server.png";
+        newAvatar2.alt = "";
+        newAvatar2.classList.add("chatbot-message-avatar");
 
-      newMessage2.appendChild(newAvatar2);
-      newMessage2.appendChild(newMessageText2);
+        const newMessageText2 = document.createElement("div");
+        newMessageText2.classList.add("chatbot-message-text");
+        newMessageText2.textContent = aiMessage;
 
-      // 생성된 요소를 메시지 컨테이너에 추가
-      chatbotMessagesContainer.appendChild(newMessage2);
+        newMessage2.appendChild(newAvatar2);
+        newMessage2.appendChild(newMessageText2);
+
+        // 생성된 요소를 메시지 컨테이너에 추가
+        chatbotMessagesContainer.appendChild(newMessage2);
+      }
 
       // 입력 창 비우기
       chatbotChatInfoChatInputBox.value = "";
 
       // 챗봇 메시지 컨테이너 표시
       chatbotMessagesWrapper.style.display = "flex";
+      chatbotMessagesContainer.style.display = "flex";
 
       // 제안 버튼 숨기기
       chatbotInfoSuggestion1.style.display = "none";
@@ -224,23 +212,29 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // 스크롤을 맨 아래로 내리기
       chatbotMessagesWrapper.scrollTop = chatbotMessagesWrapper.scrollHeight;
+
+      // 아이콘 색상 초기화
+      chatbotSendButtonIconPath.setAttribute("stroke", "#EEEEEE");
     }
   }
 
+  // 제안 메시지 1 클릭 이벤트 (Tell me about your use case)
   chatbotInfoSuggestion1.addEventListener("click", function () {
     chatbotInfoSuggestion1.style.display = "none";
     chatbotInfoSuggestion2.style.display = "none";
     sendMessage("Tell me about your use case");
   });
 
+  // 제안 메시지 2 클릭 이벤트 (How can I use it for my business?)
   chatbotInfoSuggestion2.addEventListener("click", function () {
     chatbotInfoSuggestion1.style.display = "none";
     chatbotInfoSuggestion2.style.display = "none";
     sendMessage("How can I use it for my business?");
   });
 
-  // 입력 상자에서 엔터 키를 누르면 메시지 전송
+  // input box에서 엔터 키를 누르면 메시지 전송
   chatbotChatInfoChatInputBox.addEventListener("keydown", function (event) {
+    if (event.isComposing) return;
     if (event.key === "Enter") {
       sendMessage();
     }
@@ -249,5 +243,18 @@ document.addEventListener("DOMContentLoaded", function () {
   // 전송 버튼 클릭 시 메시지 전송
   chatbotChatInfoSendButton.addEventListener("click", function () {
     sendMessage();
+  });
+
+  // 입력 상자에서 입력 이벤트가 발생할 때 아이콘 색상 변경
+  chatbotChatInfoChatInputBox.addEventListener("input", function () {
+    const MessageText = chatbotChatInfoChatInputBox.value.trim();
+    if (MessageText !== "") {
+      chatbotSendButtonIconPath.setAttribute("stroke", "#FFFFFF");
+      chatbotChatInfoSendButton.removeAttribute("disabled");
+      // chatbotInfoSuggestion1.style.display = "none";
+      // chatbotInfoSuggestion2.style.display = "none";
+    } else {
+      chatbotSendButtonIconPath.setAttribute("stroke", "#aaaaaa");
+    }
   });
 });
