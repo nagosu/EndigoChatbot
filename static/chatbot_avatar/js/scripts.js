@@ -38,88 +38,88 @@ document.addEventListener("DOMContentLoaded", function () {
     chatbot.style.height = "366px";
     chatbot.style.borderRadius = "10px";
 
-    // chatbotContainer
+    // chatbot__container
     chatbotContainer.style.width = "100%";
     chatbotContainer.style.height = "100%";
     chatbotContainer.style.borderRadius = "10px";
 
-    // chatbotPreviewImage
+    // chatbot__preview-image
     chatbotPreviewImage.style.display = "none";
 
-    // Chatbot Video
+    // chatbot__video
     chatbotVideo.style.display = "block";
 
-    // Chatbot Button
+    // chatbot__enter-button
     chatbotEnterButton.style.display = "none";
 
-    // Chatbot Close Button
+    // chatbot__close-button
     chatbotCloseButton.style.display = "flex";
 
-    // Chatbot Chat Box
+    // chatbot__chatbox
     chatbotChatbox.style.display = "flex";
     chatbotChatbox.style.height = "92.5px";
 
-    // Chatbot Info
+    // chatbot__info
     chatbotInfo.style.height = "40.5px";
     chatbotInfo.style.justifyContent = "space-between";
     chatbotInfo.style.background = "none";
     chatbotInfo.style.backdropFilter = "none";
     chatbotInfo.style.border = "none";
 
-    // Chatbot Info Suggestion Button
+    // chatbot__info_suggestion
     chatbotInfoSuggestion1.style.display = "inline-flex";
     chatbotInfoSuggestion2.style.display = "inline-flex";
 
-    // Chatbot Info Start Button
+    // chatbot__info-start-button
     chatbotInfoStartButton.style.display = "none";
   });
 
   // 챗봇 닫기 버튼 클릭 이벤트
   chatbotCloseButton.addEventListener("click", function () {
-    // chatbot Background
+    // chatbot
     chatbot.style.width = "";
     chatbot.style.height = "";
     chatbot.style.borderRadius = "";
 
-    // chatbotContainer
+    // chatbot__container
     chatbotContainer.style.width = "";
     chatbotContainer.style.height = "";
     chatbotContainer.style.borderRadius = "";
 
-    // Chatbot Info
+    // chatbot__info
     chatbotInfo.style.height = "";
     chatbotInfo.style.justifyContent = "";
     chatbotInfo.style.background = "";
     chatbotInfo.style.backdropFilter = "";
     chatbotInfo.style.border = "";
 
-    // chatbotPreviewImage
+    // chatbot__preview-image
     chatbotPreviewImage.style.display = "";
     chatbotPreviewImage.style.width = "";
 
-    // Chatbot Enter Button
+    // chatbot__enter-button
     chatbotEnterButton.style.display = "";
 
-    // Chatbot Close Button
+    // chatbot__close-button
     chatbotCloseButton.style.display = "";
 
-    // Chatbot Chat Box
+    // chatbot__chatbox
     chatbotChatbox.style.display = "";
     chatbotChatbox.style.height = "";
 
-    // Chatbot Close Button
+    // chatbot__close-button
     chatbotCloseButton.style.display = "";
 
-    // Chatbot Video
+    // chatbot__video
     chatbotVideo.style.display = "";
 
-    // Chatbot Messages Container
+    // chatbot__messages-wrapper
     chatbotMessagesWrapper.style.display = "";
 
-    // Chatbot Info Start Button
+    // chatbot__info-start-button
     chatbotInfoStartButton.style.display = "";
 
-    // Chatbot Info Suggestion Button
+    // chatbot__info-suggestion
     chatbotInfoSuggestion1.style.display = "";
     chatbotInfoSuggestion2.style.display = "";
   });
