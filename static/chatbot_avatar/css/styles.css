@@ -315,7 +315,7 @@ button {
   width: 28px;
   height: 28px;
   border: 2px solid #d6472e;
-  border-top: 3px solid transparent;
+  border-top: 2px solid transparent;
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
