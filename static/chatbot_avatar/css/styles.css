@@ -273,6 +273,7 @@ button {
 }
 
 .chatbot__voice-button {
+  position: relative;
   width: 40px;
   height: 40px;
   display: flex;
@@ -293,6 +294,30 @@ button {
   &:disabled {
     cursor: not-allowed;
   }
+}
+
+.chatbot__voice-button.active {
+  background: rgba(35, 40, 51, 0.06);
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.chatbot__voice-button.active::after {
+  content: "";
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  border: 2px solid #d6472e;
+  border-top: 3px solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
 }
 
 .chatbot__info-suggestion-1,

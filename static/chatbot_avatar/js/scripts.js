@@ -30,6 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const chatbotSendButtonIconPath = document.querySelector(
     ".chatbot__send-button-icon-path"
   );
+  const chatbotVoiceButton = document.querySelector(".chatbot__voice-button");
 
   // 챗봇 최초진입 버튼 클릭 이벤트
   chatbotEnterButton.addEventListener("click", function () {
@@ -264,5 +265,10 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
       chatbotSendButtonIconPath.setAttribute("stroke", "#aaaaaa");
     }
+  });
+
+  // 음성인식 버튼 클릭 시 active
+  chatbotVoiceButton.addEventListener("click", function () {
+    chatbotVoiceButton.classList.toggle("active");
   });
 });
